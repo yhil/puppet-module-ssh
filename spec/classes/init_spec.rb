@@ -468,6 +468,9 @@ describe 'ssh' do
         :ssh_config_user_known_hosts_file   => [ '.ssh/known_hosts1',
                                                  '.ssh/known_hosts2',
         ],
+        :ssh_config_identityfiles           => [ '~/.ssh/id_rsa',
+                                                 '~/.ssh/id_dsa',
+        ],
         :ssh_hostbasedauthentication        => 'yes',
         :ssh_strict_host_key_checking       => 'ask',
         :ssh_enable_ssh_keysign             => 'yes',
@@ -506,6 +509,8 @@ describe 'ssh' do
     it { should contain_file('ssh_config').with_content(/^\s*HostbasedAuthentication yes$/) }
     it { should contain_file('ssh_config').with_content(/^\s*StrictHostKeyChecking ask$/) }
     it { should contain_file('ssh_config').with_content(/^\s*EnableSSHKeysign yes$/) }
+    it { should contain_file('ssh_config').with_content(/^\s*IdentityFile ~\/.ssh\/id_rsa$/) }
+    it { should contain_file('ssh_config').with_content(/^\s*IdentityFile ~\/.ssh\/id_dsa$/) }
   end
 
   context 'with params used in sshd_config set on valid osfamily' do
