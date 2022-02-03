@@ -509,6 +509,8 @@ describe 'ssh' do
     it { should contain_file('ssh_config').with_content(/^\s*HostbasedAuthentication yes$/) }
     it { should contain_file('ssh_config').with_content(/^\s*StrictHostKeyChecking ask$/) }
     it { should contain_file('ssh_config').with_content(/^\s*EnableSSHKeysign yes$/) }
+    it { should contain_file('ssh_config').with_content(/^\s*IdentityFile ~\/.ssh\/id_rsa$/) }
+    it { should contain_file('ssh_config').with_content(/^\s*IdentityFile ~\/.ssh\/id_dsa$/) }
   end
 
   context 'with params used in sshd_config set on valid osfamily' do
